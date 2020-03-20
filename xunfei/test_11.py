@@ -23,10 +23,12 @@ class Request1(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         # 点击登录
-
-        self.driver = webdriver.Chrome()  # 打开谷歌浏览器
+        co_options = webdriver.ChromeOptions()
+        co_options.add_argument("disable-extensions")
+        co_options.add_argument("--start-maximized")
+        self.driver = webdriver.Chrome(options=co_options)  # 打开谷歌浏览器
         self.driver.implicitly_wait(TIME_MANAGER.TIME_OPEN_BROWSER_SEC)
-        self.driver.maximize_window()
+        # self.driver.maximize_window()
         self.driver.get(globalB.url_login)  # 访问路径
         self.driver.find_element_by_id("username").send_keys(globalB.username)  # 输入登录用户名
         # 输入密码
